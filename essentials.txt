@@ -1,0 +1,13 @@
+https://solutionfactor.net/blog/2014/02/01/honeypot-technique-fast-easy-spam-prevention/
+https://dev.to/felipperegazio/how-to-create-a-simple-honeypot-to-protect-your-web-forms-from-spammers--25n8
+
+https://code.tutsplus.com/tutorials/creating-a-custom-wordpress-registration-form-plugin--cms-20968
+https://premium.wpmudev.org/blog/how-to-build-your-own-wordpress-contact-form-and-why/
+https://www.sitepoint.com/build-your-own-wordpress-contact-form-plugin-in-5-minutes/
+
+recpatcha 3
+https://stevencotterill.com/articles/adding-google-recaptcha-v3-to-a-php-form
+https://codeforgeek.com/google-recaptcha-v3-tutorial/
+https://code.tutsplus.com/tutorials/example-of-how-to-add-google-recaptcha-v3-to-a-php-form--cms-33752
+
+https://www.codeforest.net/debugging-wp-mail-like-a-boss-debugger
