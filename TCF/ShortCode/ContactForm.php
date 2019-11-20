@@ -56,4 +56,4 @@ class TCF_Shortcode_ContactForm {
 		return ob_get_clean();
 	}
 
-}//TCF_Shortcode_ShortCode
+}//TCF_Shortcode_ContactForm
