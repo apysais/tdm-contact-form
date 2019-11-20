@@ -2,6 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/**
+* Validate an input is required.
+**/
 class TCF_ContactForm_Validate_Require {
   /**
 	 * instance of this class
@@ -36,19 +39,33 @@ class TCF_ContactForm_Validate_Require {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
+	public function __construct(){}
 
-	}
-
+	/**
+	* Check if input is required, must not be blank.
+	* @param bool $require check if the input need to validate whether required or not.
+	* @param int | string $val the value.
+	* @return boolean
+	**/
   public function is_required($require, $val){
-
     if($require && empty($val)){
       return false;
     }
     return true;
   }
 
+	/**
+	* validate the input if required.
+	* will check if the input is blank or no.
+	* value must not be blank.
+	* @param array $args {
+	*		Array of arguments.
+	*		@type string | int $value Input value.
+	*		@type bool $require Set the input to boolean, if its required or not.
+	*		@type string $msg The return message if any of the test is false
+	* }
+	* @return array
+	**/
   public function validate($args = [])
   {
 

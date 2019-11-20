@@ -39,11 +39,11 @@ class TCF_ContactForm_GetUserFillup {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
+	public function __construct(){}
 
-	}
-
+	/**
+	* Get the user form post input.
+	**/
 	public function get($post = [])
 	{
 		return $post;

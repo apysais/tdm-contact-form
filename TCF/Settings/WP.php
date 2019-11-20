@@ -3,6 +3,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 
+/**
+* Settings Page of the Contact Form.
+**/
 class TCF_Settings_WP{
 	/**
 	 * instance of this class
@@ -56,6 +59,9 @@ class TCF_Settings_WP{
 
 	}
 
+	/**
+	* Add submenu setting name.
+	**/
   public function addSubMenu()
   {
     $text_domain = tcf_get_text_domain();

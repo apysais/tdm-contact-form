@@ -2,6 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/**
+* Contact Form Shortcode.
+**/
 class TCF_Shortcode_ContactForm {
   /**
 	 * instance of this class
@@ -38,9 +41,13 @@ class TCF_Shortcode_ContactForm {
 
 	public function __construct()
 	{
+		//add the shortcode to WP.
 		add_shortcode( 'tcf_contact_form', [$this, 'init'] );
 	}
 
+	/**
+	* This is the callback of the add_shortcode.
+	**/
 	public function init($atts)
 	{
 		$a = shortcode_atts( array(

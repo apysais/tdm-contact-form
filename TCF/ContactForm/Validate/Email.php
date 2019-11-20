@@ -2,6 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/**
+* Validate an input if its email.
+**/
 class TCF_ContactForm_Validate_Email {
   /**
 	 * instance of this class
@@ -36,11 +39,14 @@ class TCF_ContactForm_Validate_Email {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
+	public function __construct(){}
 
-	}
-
+	/**
+	* Check if its email format.
+	* @param bool $is_email check if the input need to validate the email.
+	* @param email | string $email the email address.
+	* @return boolean
+	**/
   public function is_email($is_email, $email){
     if($is_email && !is_email( $email )){
         return false;
@@ -49,6 +55,16 @@ class TCF_ContactForm_Validate_Email {
     return true;
   }
 
+	/**
+	* validate the email address.
+	* @param array $args {
+	*		Array of arguments.
+	*		@type string | int $value Input value.
+	*		@type bool $is_email Set the input to boolean, if is email or not.
+	*		@type string $msg The return message if any of the test is false
+	* }
+	* @return array
+	**/
   public function validate($args = [])
   {
     $ret_array = [

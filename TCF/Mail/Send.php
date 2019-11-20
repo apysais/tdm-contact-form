@@ -2,6 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/**
+* Send Mail.
+**/
 class TCF_Mail_Send {
   /**
 	 * instance of this class
@@ -36,11 +39,20 @@ class TCF_Mail_Send {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
+	/**
+	* Constructor.
+	**/
+	public function __construct(){}
 
-	}
-
+	/**
+	* Send the contact form.
+	* @param array $args {
+	*		Array of arguments.
+	*		@type int $post_id The post id of the contact form post type.
+	*		@type array $form_user_submitted the input values of the user input in the contact form.
+	* }
+	* @return mail object.
+	**/
 	public function send($args = [])
 	{
 		$post_id = null;
@@ -72,6 +84,19 @@ class TCF_Mail_Send {
 		}
 	}
 
+	/**
+	* Mail it.
+	* @param array $args {
+	*		Array of arguments.
+	*		@type string $to Mail To.
+	*		@type string $subject Mail subject.
+	*		@type string $body Mail body message.
+	*		@type array  $headers Extra headers.
+	*		@type array | string  $attachments Files to attach.
+	* }
+	* @see https://developer.wordpress.org/reference/functions/wp_mail/
+	* @return mail object.
+	**/
 	public function mail($args = [])
 	{
 		TCF_Mail_WPMail::get_instance()->mail($args);

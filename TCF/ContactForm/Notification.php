@@ -2,6 +2,10 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/**
+* Nofication Class.
+* Use to send generic notification for user UI.
+**/
 class TCF_ContactForm_Notification {
   /**
 	 * instance of this class
@@ -40,21 +44,30 @@ class TCF_ContactForm_Notification {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
+	public function __construct(){}
 
-	}
-
+	/**
+	* Set the notification
+	* @param string @notify the notification message to send.
+	**/
   public function setNotify($notify)
   {
     $this->notify = $notify;
   }
 
+	/**
+	* Get the notification.
+	* @return $notify variable.
+	**/
   public function getNotify()
   {
     return $this->notify;
   }
 
+	/**
+	* This is to get the notification error.
+	* @return template
+	**/
   public function getNotifyError()
   {
     $notify = $this->getNotify();
@@ -64,6 +77,10 @@ class TCF_ContactForm_Notification {
     }
   }
 
+	/**
+	* This is to get the notification information.
+	* @return template
+	**/
   public function getNotifyInfo()
   {
     $notify = $this->getNotify();

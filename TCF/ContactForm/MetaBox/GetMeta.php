@@ -2,6 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/**
+* Get the contact form meta.
+**/
 class TCF_ContactForm_MetaBox_GetMeta {
   /**
 	 * instance of this class
@@ -38,11 +41,14 @@ class TCF_ContactForm_MetaBox_GetMeta {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
+	public function __construct(){}
 
-	}
-
+	/**
+	* Get the meta data of post.
+	* @param int $post_id the post id.
+	* @see TCF_ContactForm_MetaBox_PostMeta class.
+	* @return array
+	**/
   public function get($post_id)
   {
     $data = [];
@@ -71,7 +77,7 @@ class TCF_ContactForm_MetaBox_GetMeta {
       'action' => 'r',
       'single' => 1,
     ]);
-    
+
     return $data;
   }
 

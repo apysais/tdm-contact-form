@@ -3,7 +3,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 /**
- * OPtions for recaptcha
+ * OPtions for recaptcha.
  */
 class TCF_ReCaptcha_Options {
 
@@ -56,8 +56,7 @@ class TCF_ReCaptcha_Options {
     /**
      * Constructor.
      */
-    public function __construct() {
-    }
+    public function __construct() {}
 
     /**
     * Site Key

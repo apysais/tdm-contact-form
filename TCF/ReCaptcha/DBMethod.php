@@ -53,51 +53,65 @@ class TCF_ReCaptcha_DBMethod {
 		return self::$instance;
 	}
 
-    /**
-     * Constructor.
-     */
-    public function __construct() {
+  /**
+   * Constructor.
+   */
+  public function __construct() {
+  }
+
+	/**
+	* Update the settings page.
+	* @param array $post the post input from the settings.
+	**/
+  public function update($post)
+  {
+    $options = new TCF_ReCaptcha_Options;
+
+    if(isset($post['tcf_recaptcha_v3_site_key'])){
+      $options->site_key([
+        'action'  => 'u',
+        'value'   => $post['tcf_recaptcha_v3_site_key']
+      ]);
     }
 
-    public function update($post)
-    {
-      $options = new TCF_ReCaptcha_Options;
-      if(isset($post['tcf_recaptcha_v3_site_key'])){
-        $options->site_key([
-          'action'  => 'u',
-          'value'   => $post['tcf_recaptcha_v3_site_key']
-        ]);
-      }
-      if(isset($post['tcf_recaptcha_v3_secret_key'])){
-        $options->secret_key([
-          'action'  => 'u',
-          'value'   => $post['tcf_recaptcha_v3_secret_key']
-        ]);
-      }
-      if(isset($post['tcf_recaptcha_v3_score'])){
-        $options->score([
-          'action'  => 'u',
-          'value'   => $post['tcf_recaptcha_v3_score']
-        ]);
-      }
+    if(isset($post['tcf_recaptcha_v3_secret_key'])){
+      $options->secret_key([
+        'action'  => 'u',
+        'value'   => $post['tcf_recaptcha_v3_secret_key']
+      ]);
     }
 
-    public function get()
-    {
-      $data = [];
-      $options = new TCF_ReCaptcha_Options;
-      $data['site_key'] = $options->site_key([
-        'action'  => 'r',
+    if(isset($post['tcf_recaptcha_v3_score'])){
+      $options->score([
+        'action'  => 'u',
+        'value'   => $post['tcf_recaptcha_v3_score']
       ]);
-      $data['secret_key'] = $options->secret_key([
-        'action'  => 'r'
-      ]);
-      $data['score'] = $options->score([
-        'action'          => 'r',
-        'default_value'   => '0.5'
-      ]);
-
-      return $data;
     }
+  }
+
+	/**
+	* get the data from option table.
+	* @return array
+	**/
+  public function get()
+  {
+    $data = [];
+    $options = new TCF_ReCaptcha_Options;
+
+    $data['site_key'] = $options->site_key([
+      'action'  => 'r',
+    ]);
+
+    $data['secret_key'] = $options->secret_key([
+      'action'  => 'r'
+    ]);
+
+    $data['score'] = $options->score([
+      'action'          => 'r',
+      'default_value'   => '0.5'
+    ]);
+
+    return $data;
+  }
 
 } // class TCF_ReCaptcha_DBMethod

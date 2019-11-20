@@ -2,6 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/**
+* Mail using wp_mail function.
+**/
 class TCF_Mail_WPMail {
   /**
 	 * instance of this class
@@ -36,11 +39,21 @@ class TCF_Mail_WPMail {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
+	public function __construct(){}
 
-	}
-
+	/**
+	* Mail it.
+	* @param array $args {
+	*		Array of arguments.
+	*		@type string $to Mail To.
+	*		@type string $subject Mail subject.
+	*		@type string $body Mail body message.
+	*		@type array  $headers Extra headers.
+	*		@type array | string  $attachments Files to attach.
+	* }
+	* @see https://developer.wordpress.org/reference/functions/wp_mail/
+	* @return mail object.
+	**/
 	public function mail($args = [])
 	{
 		$to = '';

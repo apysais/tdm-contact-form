@@ -2,6 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/**
+* Submit the data.
+**/
 class TCF_ContactForm_Submit {
   /**
 	 * instance of this class
@@ -36,11 +39,12 @@ class TCF_ContactForm_Submit {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
+	public function __construct(){}
 
-	}
-
+	/**
+	* Initialize the submit form.
+	* We get the event when user submit the form.
+	**/
   public function init()
   {
 
@@ -96,7 +100,7 @@ class TCF_ContactForm_Submit {
         if(isset($_POST['your-message'])){
           $your_message = $_POST['your-message'];
         }
-
+				
         $validate = new TCF_ContactForm_Validate;
         $validate_args = [
           'your-name' => [

@@ -2,6 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/**
+* Validate the input form.
+**/
 class TCF_ContactForm_Validate {
   /**
 	 * instance of this class
@@ -38,10 +41,7 @@ class TCF_ContactForm_Validate {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
-
-	}
+	public function __construct(){}
 
 
   /**
@@ -58,11 +58,17 @@ class TCF_ContactForm_Validate {
     }
   }
 
+	/**
+	* Set the WP Error.
+	**/
   public function setWPError()
   {
     $this->wp_error = new WP_Error;
   }
 
+	/**
+	* Get the Wp Error from wp_error variable.
+	**/
   public function getWPError()
   {
     if ( is_wp_error( $this->wp_error ) ) {
@@ -71,6 +77,18 @@ class TCF_ContactForm_Validate {
     return false;
   }
 
+	/**
+	* Validate the input form base on the array arguments.
+	* @param array $forms {
+	*		Array of arguments.
+	*		@type string $label Input label or name.
+	*		@type string | int $value Input value.
+	*		@type bool $require Set the input to boolean, if its required or not.
+	*		@type bool $is_email Set the input to boolean, if is email or not.
+	*		@type string $msg The return message if any of the test is false
+	*			See folder TCF/Validate for the list of Validate object to use.
+	* }
+	**/
   public function validate($forms = [])
   {
     $this->setWPError();

@@ -2,6 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
+/**
+* Add the recaptcha v3 in wordpress.
+**/
 class TCF_ReCaptcha_V3 {
   /**
 	 * instance of this class
@@ -36,16 +39,19 @@ class TCF_ReCaptcha_V3 {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
+	public function __construct(){}
 
-	}
-
+	/**
+	* Initialize the add action hook.
+	**/
   public function init()
   {
     add_action('wp_enqueue_scripts', [$this, 'enqueueScript'] );
   }
 
+	/**
+	* Add the script needed.
+	**/
   public function enqueueScript()
   {
     wp_enqueue_script( 'google-recaptcha-v3', 'https://www.google.com/recaptcha/api.js?render='.tcf_get_recaptcha_site_key().'', array( 'jquery' ), 3 );

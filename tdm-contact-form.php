@@ -38,9 +38,7 @@ if ( ! defined( 'WPINC' ) ) {
 define( 'TDM_CONTACT_FORM_VERSION', '1.0.0' );
 define('TCF_POST_TYPE', 'tcf-contact-form');
 //move this to settings
-define('TCF_RECAPTCHA_V3_SITE_KEY', '6LcJpMIUAAAAAMt9psfGdCOWrTg7ikf-9cGhmmdR');
-define('TCF_RECAPTCHA_V3_SECRET_KEY', '6LcJpMIUAAAAAOhcRoG2m1xKrgVfe3Krup0V-0zD');
-define('TCF_RECAPTCHA_V3_SCORE', '0.5');
+
 //move this to settings
 /**
  * For autoloading classes
@@ -68,16 +66,29 @@ function tcf_get_plugin_details(){
  $ret = get_plugins();
  return $ret['tdm-contact-form/tdm-contact-form.php'];
 }
+
+/**
+* get the text domain of the plugin.
+**/
 function tcf_get_text_domain(){
  $ret = tcf_get_plugin_details();
  return $ret['TextDomain'];
 }
+
+/**
+* get the plugin directory path.
+**/
 function tcf_get_plugin_dir(){
  return plugin_dir_path( __FILE__ );
 }
+
+/**
+* get the plugin url path.
+**/
 function tcf_get_plugin_dir_url(){
  return plugin_dir_url( __FILE__ );
 }
+
 /**
  * The code that runs during plugin activation.
  * This action is documented in includes/class-tdm-contact-form-activator.php
@@ -131,11 +142,10 @@ function run_tdm_contact_form() {
 	TCF_ShortCode_ContactForm::get_instance();
 	TCF_Settings_WP::get_instance()->addSubMenu();
 }
-//run_tdm_contact_form();
+
 add_action('plugins_loaded', 'run_tdm_contact_form');
 
-function tdm_init()
-{
+function tdm_init() {
 	TCF_ContactForm_PostType::get_instance()->init();
 	TCF_ContactForm_Submit::get_instance()->init();
 }

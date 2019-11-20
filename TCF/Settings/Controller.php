@@ -40,6 +40,9 @@ class TCF_Settings_Controller extends TCF_Base {
 		return self::$instance;
 	}
 
+	/**
+	* Index / Dashboard of the settings page.
+	**/
   public function tcf_settings()
   {
     $data = [];
@@ -47,6 +50,9 @@ class TCF_Settings_Controller extends TCF_Base {
 		TCF_View::get_instance()->admin_partials('settings/index.php', $data);
   }
 
+	/**
+	* Update the settings.
+	**/
 	public function update_settings()
 	{
 		TCF_ReCaptcha_DBMethod::get_instance()->update($_POST);

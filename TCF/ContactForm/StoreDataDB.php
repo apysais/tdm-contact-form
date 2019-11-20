@@ -59,6 +59,14 @@ class TCF_ContactForm_StoreDataDB {
   public function __construct() {
   }
 
+	/**
+	* Store the data in database.
+	* @param array $args {
+	*		Array of arguments.
+	*		@type array $post_data The data from input post form.
+	*		@type int $post_id Post Id of the contact form, post type.
+	* }
+	**/
   public function store($args = [])
   {
     $post = null;
