@@ -68,16 +68,32 @@ class TCF_Mail_Send {
 		if(!is_null($post_id)){
 			$post = get_post( $post_id );
 			if($post){
+	
 				$get_meta_mail = TCF_ContactForm_MetaBox_GetMeta::get_instance()->get($post_id);
 				TCF_ContactForm_StoreDataDB::get_instance()->store($form_user_submitted);
 
 				$body = $get_meta_mail['message_body'];
-				$body .= $form_user_submitted['post_data']['your-message'];
+
+				$headers = [];
+
+				$from = $get_meta_mail['from'] ? $get_meta_mail['from'] : false;
+				if($from){
+					$headers[] = 'From: ' . $from;
+				}
+
+				$additional_headers = $get_meta_mail['additional_headers'] ? $get_meta_mail['additional_headers'] : false;
+				if($additional_headers){
+					$headers = array_merge($headers, $additional_headers);
+				}
+
+				$subject = tcf_search_replace_subject($get_meta_mail['subject'], $args['form_user_submitted']['post_data']);
+				$body_message = tcf_search_replace_message($body, $args['form_user_submitted']['post_data']);
 
 				$this->mail([
 					'to' 			=> $get_meta_mail['to'],
-					'subject' => $get_meta_mail['subject'],
-					'body' 		=> $body,
+					'subject' => $subject,
+					'body' 		=> wpautop($body_message),
+					'headers' => $headers
 				]);
 
 			}

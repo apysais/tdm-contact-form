@@ -47,7 +47,7 @@ class TCF_ContactForm_Submit {
 	**/
   public function init()
   {
-
+		//tcf_dd($_POST);exit();
     if(isset($_POST['tcf-form-submit']) && $_POST['tcf-form-submit']){
       $post_id = 0;
       if(isset($_POST['tcf-form-post-id'])){
@@ -81,48 +81,11 @@ class TCF_ContactForm_Submit {
           $token_captcha = $_POST['token'];
         }
 
-        $your_name = '';
-        if(isset($_POST['your-name'])){
-          $your_name = $_POST['your-name'];
-        }
-
-        $your_email = '';
-        if(isset($_POST['your-email'])){
-          $your_email = $_POST['your-email'];
-        }
-
-        $your_phone = '';
-        if(isset($_POST['your-phone'])){
-          $your_phone = $_POST['your-phone'];
-        }
-
-        $your_message = '';
-        if(isset($_POST['your-message'])){
-          $your_message = $_POST['your-message'];
-        }
-				
         $validate = new TCF_ContactForm_Validate;
-        $validate_args = [
-          'your-name' => [
-            'label' => 'Your Name',
-            'value' => $your_name,
-            'require' => true
-          ],
-          'your-email' => [
-            'value' => $your_email,
-            'require' => true,
-            'is_email' => true
-          ],
-          'your-phone' => [
-            'value' => $your_phone,
-            'require' => true,
-          ],
-          'your-message' => [
-            'value' => $your_message,
-            'require' => true,
-          ],
-        ];
-        $validate->validate($validate_args);
+				$validate_args = $validate->parseInput($_POST);
+				if($validate_args){
+					$validate->validate($validate_args);
+				}
         $return_notify = $validate->getWPError();
         if($return_notify){
           $error_notify = $return_notify;
@@ -134,13 +97,14 @@ class TCF_ContactForm_Submit {
           //pass it first to recaptcha
           $captchaObj = new TCF_ReCaptcha_V3;
           $check = $captchaObj->check($token_captcha, $action_captcha);
+          //$check = true;
           if($check){
               //send email;
 							if($post_id != 0){
 								TCF_Mail_Send::get_instance()->send([
 									'post_id' => $post_id,
 									'form_user_submitted' => [
-										'post_data'	=> $_POST,
+										'post_data'	=> $validate_args,
 										'post_id' 	=> $post_id
 									],
 								]);
@@ -149,7 +113,6 @@ class TCF_ContactForm_Submit {
 									'type' 	=> 'info',
 									'msg' => ['Thank you for enquiring.']
 								]);
-
 							}
           }else{
 						TCF_ContactForm_Notification::get_instance()->setNotify([

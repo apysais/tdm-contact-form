@@ -2,7 +2,7 @@
   <?php TCF_ContactForm_Notification::get_instance()->getNotifyError(); ?>
   <?php TCF_ContactForm_Notification::get_instance()->getNotifyInfo(); ?>
 
-  <?php TCF_View::get_instance()->public_partials('shortcode/basic-input.php', $data); ?>
+  <?php echo $form_inputs;?>
 
   <?php TCF_View::get_instance()->public_partials('shortcode/honeypot-input.php', $data); ?>
   <input type="hidden" name="tcf-form-submit" value="1">

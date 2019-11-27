@@ -9,6 +9,7 @@ function set_custom_edit_tcf_columns($columns) {
   $text_domain = tcf_get_text_domain();
   unset($columns['date']);
   $columns['shortcode'] = __( 'Shortcode', $text_domain );
+  //$columns['data'] = __( 'Data', $text_domain );
   $columns['date'] = __( 'Date', $text_domain );
 
   return $columns;
@@ -19,8 +20,9 @@ add_action( 'manage_tcf-contact-form_posts_custom_column' , 'custom_tcf_column',
 function custom_tcf_column( $column, $post_id ) {
     switch ( $column ) {
         case 'shortcode' :
-          echo 'Shortcode';
+          echo '[tcf_contact_form id="'.$post_id.'"]';
         break;
+
         case 'date' :
         break;
     }

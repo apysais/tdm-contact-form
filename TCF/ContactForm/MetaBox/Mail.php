@@ -77,14 +77,13 @@ class TCF_ContactForm_MetaBox_Mail {
      */
     public function add_metabox() {
         add_meta_box(
-            'tcf-mail-meta-box',
-            __( 'Mail Settings', 'textdomain' ),
-            array( $this, 'render_metabox' ),
-            TCF_POST_TYPE,
-            'advanced',
-            'default'
+          'tcf-mail-meta-box',
+          __( 'Mail Settings', 'textdomain' ),
+          array( $this, 'render_metabox' ),
+          TCF_POST_TYPE,
+          'advanced',
+          'default'
         );
-
     }
 
     /**
@@ -93,17 +92,24 @@ class TCF_ContactForm_MetaBox_Mail {
     public function render_metabox( $post ) {
         // Add nonce for security and authentication.
         wp_nonce_field( 'tcf_mail_settings_nonce_action', 'tcf_mail_settings_nonce' );
+
         $data = [];
         $data['to'] = TCF_ContactForm_MetaBox_PostMeta::get_instance()->mail_to([
           'post_id' => $post->ID,
           'action' => 'r',
           'single' => 1,
         ]);
-        $data['from'] = TCF_ContactForm_MetaBox_PostMeta::get_instance()->mail_from([
+
+				$data['from'] = get_bloginfo('name') . '<'.get_bloginfo('admin_email').'>';
+        $db_from = TCF_ContactForm_MetaBox_PostMeta::get_instance()->mail_from([
           'post_id' => $post->ID,
           'action' => 'r',
           'single' => 1,
         ]);
+				if($db_from){
+					$data['from'] = $db_from;
+				}
+
         $data['subject'] = TCF_ContactForm_MetaBox_PostMeta::get_instance()->mail_subject([
           'post_id' => $post->ID,
           'action' => 'r',
@@ -119,6 +125,12 @@ class TCF_ContactForm_MetaBox_Mail {
           'action' => 'r',
           'single' => 1,
         ]);
+
+				$data['form_inputs'] = TCF_ContactForm_MetaBox_PostMeta::get_instance()->form_input([
+					'post_id' => $post->ID,
+					'action' => 'r',
+					'single' => 1,
+				]);
         TCF_View::get_instance()->admin_partials('metabox/mail.php', $data);
     }
 
@@ -201,6 +213,16 @@ class TCF_ContactForm_MetaBox_Mail {
             'post_id' => $post_id,
             'action' => 'u',
             'value'  => $mail_message_body
+          ]);
+        }
+
+        $mail_form_input = '';
+        if(isset($_POST['inputForm'])){
+          $mail_form_input = $_POST['inputForm'];
+          TCF_ContactForm_MetaBox_PostMeta::get_instance()->form_input([
+            'post_id' => $post_id,
+            'action' => 'u',
+            'value'  => htmlentities($mail_form_input)
           ]);
         }
     }

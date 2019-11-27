@@ -78,6 +78,21 @@ class TCF_ContactForm_Validate {
   }
 
 	/**
+	* Parse Input form.
+	**/
+	public function parseInput($post_input_arr = [])
+	{
+		$data = false;
+		if(isset($post_input_arr['tcf_input'])){
+			foreach($post_input_arr['tcf_input'] as $k => $v){
+				$v['value'] = $v['value'][0];
+				$data[$k] = $v;
+			}
+		}
+		return $data;
+	}
+
+	/**
 	* Validate the input form base on the array arguments.
 	* @param array $forms {
 	*		Array of arguments.

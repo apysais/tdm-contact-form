@@ -121,6 +121,7 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-tdm-contact-form.php';
 **/
 require plugin_dir_path( __FILE__ ) . 'functions/helper.php';
 require plugin_dir_path( __FILE__ ) . 'functions/column.php';
+require plugin_dir_path( __FILE__ ) . 'functions/mail.php';
 require plugin_dir_path( __FILE__ ) . 'functions/settings.php';
 
 /**

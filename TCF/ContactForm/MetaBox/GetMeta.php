@@ -57,26 +57,35 @@ class TCF_ContactForm_MetaBox_GetMeta {
       'action' => 'r',
       'single' => 1,
     ]);
-    $data['from'] = TCF_ContactForm_MetaBox_PostMeta::get_instance()->mail_from([
+
+		$data['from'] = TCF_ContactForm_MetaBox_PostMeta::get_instance()->mail_from([
       'post_id' => $post_id,
       'action' => 'r',
       'single' => 1,
     ]);
-    $data['subject'] = TCF_ContactForm_MetaBox_PostMeta::get_instance()->mail_subject([
+
+		$data['subject'] = TCF_ContactForm_MetaBox_PostMeta::get_instance()->mail_subject([
       'post_id' => $post_id,
       'action' => 'r',
       'single' => 1,
     ]);
-    $data['additional_headers'] = TCF_ContactForm_MetaBox_PostMeta::get_instance()->mail_additional_headers([
+
+		$data['additional_headers'] = TCF_ContactForm_MetaBox_PostMeta::get_instance()->mail_additional_headers([
       'post_id' => $post_id,
       'action' => 'r',
       'single' => 1,
     ]);
+		if($data['additional_headers']){
+			$data['additional_headers'] = tcf_split_by_newline($data['additional_headers']);
+		}
+
     $data['message_body'] = TCF_ContactForm_MetaBox_PostMeta::get_instance()->mail_message_body([
       'post_id' => $post_id,
       'action' => 'r',
       'single' => 1,
     ]);
+
+		$data['form_inputs'] = tcf_get_form_inputs($post_id);
 
     return $data;
   }

@@ -3,9 +3,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 /**
-* Contact Form Shortcode.
+* Convert the parse string into input.
 **/
-class TCF_Shortcode_ContactForm {
+class TCF_ContactForm_Input_Convert
+{
   /**
 	 * instance of this class
 	 *
@@ -39,31 +40,14 @@ class TCF_Shortcode_ContactForm {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
-		//add the shortcode to WP.
-		add_shortcode( 'tcf_contact_form', [$this, 'init'] );
-	}
+  public function convert($args){
 
-	/**
-	* This is the callback of the add_shortcode.
-	**/
-	public function init($atts)
-	{
-		$a = shortcode_atts( array(
-      'id' => 0
-		), $atts );
+    $type = $args['type'];
+    $class_input = 'TCF_ContactForm_Input_' . ucwords($type);
+    if (class_exists($class_input)){
+      $obj = new $class_input;
+      return $obj->get($args);
+    }
+  }
 
-		$data = [];
-		$post_id = $a['id'];
-
-    $data['contact_post_id'] = $post_id;
-		$form_input = tcf_get_form_inputs($post_id);
-		$data['form_inputs'] = tcf_get_contact_form_inputs($form_input);
-
-		ob_start();
-		TCF_View::get_instance()->public_partials('shortcode/contact-form.php', $data);
-		return ob_get_clean();
-	}
-
-}//TCF_Shortcode_ContactForm
+}//TCF_ContactForm_Input_Convert

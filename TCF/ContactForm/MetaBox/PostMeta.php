@@ -279,4 +279,44 @@ class TCF_ContactForm_MetaBox_PostMeta {
       }
     }
   }
+
+  /**
+  * Input Forms.
+  * @param array $args {
+  *		Array of arguments.
+  *		@type int $post_id the article id, required.
+  *		@type bool $single this will return string if true else array if false. default is false.
+  *		@type string $action CRUD action, default is read.
+  *			accepted values: r (read), u (update), d (delete)
+  *		@type string $prefix the prefix meta key.
+  * }
+  * @return  $action, r = get_post_meta(), u = update_post_meta(), d = delete_post_meta
+  **/
+  public function form_input($args = []){
+    $prefix = 'tcf_form_input';
+    if(isset($args['post_id'])) {
+      $defaults = array(
+        'single'  => false,
+        'action'  => 'r',
+        'value'   => '',
+        'prefix'  => $prefix
+      );
+      $args = wp_parse_args( $args, $defaults );
+      switch($args['action']){
+        case 'd':
+          delete_post_meta($args['post_id'], $args['prefix'], $args['value']);
+        break;
+        case 'u':
+          update_post_meta($args['post_id'], $args['prefix'], $args['value']);
+        break;
+        case 'c':
+          add_post_meta($args['post_id'], $args['prefix'], $args['value']);
+        break;
+        case 'r':
+          return get_post_meta($args['post_id'], $args['prefix'], $args['single']);
+        break;
+      }
+    }
+  }
+
 } // class TCF_ContactForm_MetaBox_PostMeta

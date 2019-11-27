@@ -3,9 +3,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; // Exit if accessed directly
 }
 /**
-* Contact Form Shortcode.
+* Convert string parse to input submit.
 **/
-class TCF_Shortcode_ContactForm {
+class TCF_ContactForm_Input_Submit
+{
   /**
 	 * instance of this class
 	 *
@@ -14,6 +15,8 @@ class TCF_Shortcode_ContactForm {
 	 * @var	null
 	 * */
 	protected static $instance = null;
+
+  private $string_input_arr;
 
 	/**
 	 * Return an instance of this class.
@@ -39,31 +42,9 @@ class TCF_Shortcode_ContactForm {
 		return self::$instance;
 	}
 
-	public function __construct()
-	{
-		//add the shortcode to WP.
-		add_shortcode( 'tcf_contact_form', [$this, 'init'] );
-	}
-
-	/**
-	* This is the callback of the add_shortcode.
-	**/
-	public function init($atts)
-	{
-		$a = shortcode_atts( array(
-      'id' => 0
-		), $atts );
-
-		$data = [];
-		$post_id = $a['id'];
-
-    $data['contact_post_id'] = $post_id;
-		$form_input = tcf_get_form_inputs($post_id);
-		$data['form_inputs'] = tcf_get_contact_form_inputs($form_input);
-
-		ob_start();
-		TCF_View::get_instance()->public_partials('shortcode/contact-form.php', $data);
-		return ob_get_clean();
-	}
-
-}//TCF_Shortcode_ContactForm
+  public function get($args = [])
+  {
+    $input = htmlentities('<input type="submit" value="'.$args['label'].'">');
+    return $input;
+  }
+}//TCF_ContactForm_Input_Submit

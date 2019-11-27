@@ -11,3 +11,9 @@ https://codeforgeek.com/google-recaptcha-v3-tutorial/
 https://code.tutsplus.com/tutorials/example-of-how-to-add-google-recaptcha-v3-to-a-php-form--cms-33752
 
 https://www.codeforest.net/debugging-wp-mail-like-a-boss-debugger
+
+
+preg pattern
+https://stackoverflow.com/questions/27442580/find-string-patterns-enclosed-in-specific-characters-php
+
+https://stackoverflow.com/questions/27554027/pass-data-to-parent-window-from-modal-using-bootstrap
