@@ -95,9 +95,9 @@ class TCF_ContactForm_Submit {
 					]);
         }else{
           //pass it first to recaptcha
-          $captchaObj = new TCF_ReCaptcha_V3;
-          $check = $captchaObj->check($token_captcha, $action_captcha);
-          //$check = true;
+          //$captchaObj = new TCF_ReCaptcha_V3;
+          //$check = $captchaObj->check($token_captcha, $action_captcha);
+          $check = true;
           if($check){
               //send email;
 							if($post_id != 0){

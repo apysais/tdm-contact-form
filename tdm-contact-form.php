@@ -142,6 +142,7 @@ function run_tdm_contact_form() {
 	TCF_ReCaptcha_V3::get_instance()->init();
 	TCF_ShortCode_ContactForm::get_instance();
 	TCF_Settings_WP::get_instance()->addSubMenu();
+	TCF_Data_WP::get_instance()->addSubMenu();
 }
 
 add_action('plugins_loaded', 'run_tdm_contact_form');

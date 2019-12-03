@@ -58,6 +58,15 @@ function tcf_get_form_inputs($post_id)
 	return wpautop($form_input);
 }
 
+function tcf_get_complete_meta( $post_id, $meta_key ) {
+  global $wpdb;
+  $mid = $wpdb->get_results( $wpdb->prepare("SELECT * FROM $wpdb->postmeta WHERE post_id = %d AND meta_key = %s", $post_id, $meta_key) );
+  if( $mid != '' )
+    return $mid;
+
+  return false;
+}
+
 function mailtrap($phpmailer) {
   $phpmailer->isSMTP();
   $phpmailer->Host = 'smtp.mailtrap.io';
