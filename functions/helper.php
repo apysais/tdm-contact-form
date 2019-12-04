@@ -37,7 +37,6 @@ function tcf_get_contact_form_inputs($string)
   if(isset($get[1])){
     $arr_get = $get[1];
   }
-
   $parseObj = new TCF_ContactForm_Input_Parse;
   $parse_fields = $parseObj->get($arr_get);
 
@@ -76,4 +75,4 @@ function mailtrap($phpmailer) {
   $phpmailer->Password = 'b34291b889be14';
 }
 
-add_action('phpmailer_init', 'mailtrap');
+//add_action('phpmailer_init', 'mailtrap');

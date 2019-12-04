@@ -44,6 +44,7 @@ class TCF_ContactForm_Input_Convert
 
     $type = $args['type'];
     $class_input = 'TCF_ContactForm_Input_' . ucwords($type);
+
     if (class_exists($class_input)){
       $obj = new $class_input;
       return $obj->get($args);

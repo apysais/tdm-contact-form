@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
 * Convert parse string to Input TextArea.
 **/
-class TCF_ContactForm_Input_TextArea
+class TCF_ContactForm_Input_Textarea
 {
   /**
 	 * instance of this class

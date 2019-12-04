@@ -49,6 +49,12 @@
 			 var $txt = $('#inputForm');
 
 			 insertAtCaret($txt[0], _ret_string);
+			 _label.val('');
+			 _name.val('');
+			 _require.val(0);
+			 _is_email.val(0);
+			 _class_input.val('');
+			 _id_input.val('');
 			 $('#textModal').modal('hide');
 		 });
 
@@ -87,6 +93,13 @@
 			 var $txt = $('#inputForm');
 
 			 insertAtCaret($txt[0], _ret_string);
+
+			 _label.val('');
+			 _name.val('');
+			 _require.val(0);
+			 _class_input.val('');
+			 _id_input.val('');
+
 			 $('#textAreaModalLabel').modal('hide');
 		 });
 
@@ -119,6 +132,12 @@
 			 var $txt = $('#inputForm');
 
 			 insertAtCaret($txt[0], _ret_string);
+
+			 _label.val('');
+			 _name.val('');
+			 _class_input.val('');
+			 _id_input.val('');
+
 			 $('#submitModal').modal('hide');
 		 });
 
